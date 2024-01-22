@@ -53,12 +53,14 @@
 }
 
 .todos {
+  box-sizing: border-box;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   width: 47.5%;
   padding: 15px;
   background-color: rgb(50, 195, 205);
+  color: #000;
 }
 
 .dragactive {
@@ -75,8 +77,7 @@
 
 .todos__heading {
   font-size: 30px;
-  /* text-align: center; */
-  color: white;
+  /color: white;
 }
 
 .todos__single {
@@ -110,6 +111,14 @@
 
 .todos__single-text:focus {
   outline: none;
+}
+
+.todos__single-input {
+  width: 100%;
+  border: transparent;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 .icon {

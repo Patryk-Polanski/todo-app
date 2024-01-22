@@ -25,6 +25,10 @@ const App: React.FC = () => {
     <div className='App'>
       <h1 className='heading'>Taskify</h1>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+      <p className='info'>
+        When in editing mode, press "Enter" to save changes. Empty input field
+        cancels changes on "Enter".
+      </p>
       <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
