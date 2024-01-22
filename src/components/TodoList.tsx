@@ -1,11 +1,11 @@
 import './styles.css';
 
-import { Todo, ActionProps } from '../model';
+import { TodoProps, TodoActionProps } from '../model';
 import TodoItem from './TodoItem';
 
 interface TodosListProps {
-  todos: Todo[];
-  todosDispatch: React.Dispatch<ActionProps>;
+  todos: TodoProps[];
+  todosDispatch: React.Dispatch<TodoActionProps>;
 }
 
 const TodoList = ({ todos, todosDispatch }: TodosListProps) => {

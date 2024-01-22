@@ -1,9 +1,9 @@
 import { useReducer } from 'react';
 
-import { Todo, ActionProps } from '../model';
+import { TodoProps, TodoActionProps } from '../model';
 
 function useTodos() {
-  const todoReducer = (todos: Todo[], action: ActionProps) => {
+  const todoReducer = (todos: TodoProps[], action: TodoActionProps) => {
     switch (action.type) {
       case 'ADD':
         return [

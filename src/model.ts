@@ -1,10 +1,10 @@
-export interface Todo {
+export type TodoProps = {
   id: number;
   todo: string;
   isDone: boolean;
-}
+};
 
-export type ActionProps =
+export type TodoActionProps =
   | { type: 'ADD'; payload: string }
   | { type: 'COMPLETE'; payload: number }
   | { type: 'DELETE'; payload: number }

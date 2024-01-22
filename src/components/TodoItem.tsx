@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 
-import { Todo, ActionProps } from '../model';
+import { TodoProps, TodoActionProps } from '../model';
 
 import './styles.css';
 
 interface TodoItemProps {
-  todo: Todo;
-  todosDispatch: React.Dispatch<ActionProps>;
+  todo: TodoProps;
+  todosDispatch: React.Dispatch<TodoActionProps>;
 }
 
 const TodoItem = ({ todo, todosDispatch }: TodoItemProps) => {
