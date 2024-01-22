@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import { useTodos } from './hooks/useTodos';
 
@@ -20,19 +21,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className='App'>
-      <h1 className='heading'>Taskify</h1>
-      <InputField
-        todo={todoText}
-        setTodoText={setTodoText}
-        handleAdd={handleAdd}
-      />
-      <p className='info'>
-        When in editing mode, press "Enter" to save changes. Empty input field
-        cancels changes on "Enter".
-      </p>
-      <TodoList todos={todos} todosDispatch={todosDispatch} />
-    </div>
+    <DragDropContext onDragEnd={() => {}}>
+      <div className='App'>
+        <h1 className='heading'>Taskify</h1>
+        <InputField
+          todo={todoText}
+          setTodoText={setTodoText}
+          handleAdd={handleAdd}
+        />
+        <p className='info'>
+          When in editing mode, press "Enter" to save changes. Empty input field
+          cancels changes on "Enter".
+        </p>
+        <TodoList todos={todos} todosDispatch={todosDispatch} />
+      </div>
+    </DragDropContext>
   );
 };
 
