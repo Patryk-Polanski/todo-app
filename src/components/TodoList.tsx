@@ -6,22 +6,26 @@ import TodoItem from './TodoItem';
 import './styles.css';
 
 interface TodosListProps {
-  todos: TodoProps[];
+  uncompletedTodos: TodoProps[];
+  completedTodos: TodoProps[];
   todosDispatch: React.Dispatch<TodoActionProps>;
 }
 
-const TodoList = ({ todos, todosDispatch }: TodosListProps) => {
-  const uncompletedTodos = todos.filter((todo) => !todo.isDone);
-  const completedTodos = todos.filter((todo) => todo.isDone);
-
+const TodoList = ({
+  completedTodos,
+  uncompletedTodos,
+  todosDispatch,
+}: TodosListProps) => {
   return (
     <div className='container'>
       <div className='todos'>
         <h2 className='todos__heading'>Active Tasks</h2>
         <Droppable droppableId='todosIncomplete'>
-          {(provided) => (
+          {(provided, snapshot) => (
             <ul
-              className='todos__list'
+              className={`todos__list ${
+                snapshot.isDraggingOver ? 'drag-incomplete' : ''
+              }`}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -41,9 +45,11 @@ const TodoList = ({ todos, todosDispatch }: TodosListProps) => {
       <div className='todos remove'>
         <h2 className='todos__heading'>Completed Tasks</h2>
         <Droppable droppableId='todosComplete'>
-          {(provided) => (
+          {(provided, snapshot) => (
             <ul
-              className='todos__list'
+              className={`todos__list ${
+                snapshot.isDraggingOver ? 'drag-complete' : ''
+              }`}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

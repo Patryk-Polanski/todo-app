@@ -28,6 +28,9 @@ function useTodos() {
             : todo;
         });
 
+      case 'REORDER':
+        return [...action.payload.incomplete, ...action.payload.complete];
+
       default:
         return todos;
     }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { MdDone } from 'react-icons/md';
+import { MdClose, MdDone } from 'react-icons/md';
 
 import { TodoProps, TodoActionProps } from '../model';
 
@@ -45,9 +45,9 @@ const TodoItem = ({ index, todo, todosDispatch }: TodoItemProps) => {
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <li
-          className='todos__list-item'
+          className={`todos__list-item ${snapshot.isDragging ? 'drag' : ''}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -76,7 +76,7 @@ const TodoItem = ({ index, todo, todosDispatch }: TodoItemProps) => {
                   <AiFillDelete />
                 </span>
                 <span className='icon' onClick={() => handleComplete(todo.id)}>
-                  <MdDone />
+                  {!todo.isDone ? <MdDone /> : <MdClose />}
                 </span>
               </div>
             )}
