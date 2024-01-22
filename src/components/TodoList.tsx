@@ -10,13 +10,36 @@ interface TodosListProps {
 
 const TodoList = ({ todos, todosDispatch }: TodosListProps) => {
   return (
-    todos.length > 0 && (
-      <ul className='todos'>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} todosDispatch={todosDispatch} />
-        ))}
-      </ul>
-    )
+    <div className='container'>
+      <div className='todos'>
+        <h2 className='todos__heading'>Active Tasks</h2>
+        {todos.length > 0 && (
+          <ul className='todos__list'>
+            {todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                todosDispatch={todosDispatch}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className='todos remove'>
+        <h2 className='todos__heading'>Completed Tasks</h2>
+        {todos.length > 0 && (
+          <ul className='todos__list'>
+            {todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                todosDispatch={todosDispatch}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 };
 
