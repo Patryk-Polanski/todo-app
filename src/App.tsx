@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Todo } from './model';
+import { useTodos } from './hooks/useTodos';
 
 import InputField from './components/InputField';
 
@@ -8,28 +8,30 @@ import './App.css';
 import TodoList from './components/TodoList';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [todo, setTodo] = useState<string>('');
+  const { todos, todosDispatch } = useTodos();
+  const [todoText, setTodoText] = useState<string>('');
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!todo) return;
-    setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
-    setTodo('');
+    if (!todoText) return;
+    todosDispatch({ type: 'ADD', payload: todoText });
+    setTodoText('');
   };
-
-  console.log('todos', todos);
 
   return (
     <div className='App'>
       <h1 className='heading'>Taskify</h1>
-      <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+      <InputField
+        todo={todoText}
+        setTodoText={setTodoText}
+        handleAdd={handleAdd}
+      />
       <p className='info'>
         When in editing mode, press "Enter" to save changes. Empty input field
         cancels changes on "Enter".
       </p>
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoList todos={todos} todosDispatch={todosDispatch} />
     </div>
   );
 };

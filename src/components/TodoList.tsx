@@ -1,25 +1,19 @@
 import './styles.css';
 
-import { Todo } from '../model';
+import { Todo, ActionProps } from '../model';
 import TodoItem from './TodoItem';
 
 interface TodosListProps {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todosDispatch: React.Dispatch<ActionProps>;
 }
 
-const TodoList = ({ todos, setTodos }: TodosListProps) => {
-  console.log('ajskdhajsdhsa', todos);
+const TodoList = ({ todos, todosDispatch }: TodosListProps) => {
   return (
     todos.length > 0 && (
       <ul className='todos'>
         {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            todos={todos}
-            setTodos={setTodos}
-          />
+          <TodoItem key={todo.id} todo={todo} todosDispatch={todosDispatch} />
         ))}
       </ul>
     )

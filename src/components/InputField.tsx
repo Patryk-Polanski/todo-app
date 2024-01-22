@@ -4,11 +4,11 @@ import './styles.css';
 
 interface InputFieldProps {
   todo: string;
-  setTodo: React.Dispatch<React.SetStateAction<string>>;
+  setTodoText: React.Dispatch<React.SetStateAction<string>>;
   handleAdd: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const InputField = ({ todo, setTodo, handleAdd }: InputFieldProps) => {
+const InputField = ({ todo, setTodoText, handleAdd }: InputFieldProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -25,7 +25,7 @@ const InputField = ({ todo, setTodo, handleAdd }: InputFieldProps) => {
         placeholder='Enter a task'
         className='input__box'
         value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        onChange={(e) => setTodoText(e.target.value)}
       />
       <button className='input__submit' type='submit'>
         Go

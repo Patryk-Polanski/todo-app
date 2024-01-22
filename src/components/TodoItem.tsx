@@ -2,30 +2,25 @@ import { useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 
-import { Todo } from '../model';
+import { Todo, ActionProps } from '../model';
 
 import './styles.css';
 
 interface TodoItemProps {
   todo: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todosDispatch: React.Dispatch<ActionProps>;
 }
 
-const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
+const TodoItem = ({ todo, todosDispatch }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedText, setEditedText] = useState<string>(todo.todo);
 
-  const handleDone = (id: number) => {
-    const updatedTodos = todos.map((todo) => {
-      return todo.id === id ? { ...todo, isDone: !todo.isDone } : todo;
-    });
-    setTodos(updatedTodos);
+  const handleComplete = (id: number) => {
+    todosDispatch({ type: 'COMPLETE', payload: id });
   };
 
   const handleDelete = (id: number) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
+    todosDispatch({ type: 'DELETE', payload: id });
   };
 
   const handleEditMode = () => {
@@ -41,10 +36,8 @@ const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
       return;
     }
 
-    const updatedTodos = todos.map((todo) => {
-      return todo.id === id ? { ...todo, todo: editedText } : todo;
-    });
-    setTodos(updatedTodos);
+    todosDispatch({ type: 'UPDATE', payload: { id, editedText } });
+
     setIsEditing(false);
   };
 
@@ -77,7 +70,7 @@ const TodoItem = ({ todo, todos, setTodos }: TodoItemProps) => {
             <span className='icon' onClick={() => handleDelete(todo.id)}>
               <AiFillDelete />
             </span>
-            <span className='icon' onClick={() => handleDone(todo.id)}>
+            <span className='icon' onClick={() => handleComplete(todo.id)}>
               <MdDone />
             </span>
           </div>
